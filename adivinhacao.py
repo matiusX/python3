@@ -27,7 +27,7 @@ while valida_nivel:
 
 pontos = 1000
 
-# Testa chute
+# Testa chutes
 for tentativas in range(1, tentativas + 1):
     chute = int(input("Digite seu chute: "))
     if chute == number:
