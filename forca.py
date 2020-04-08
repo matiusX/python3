@@ -1,15 +1,18 @@
-word = 'apple'
-letters = ['_', '_', '_', '_', '_']
-'''
-hello
-'''
-count_hits = 0
-chances = 0
+import random
+
+words = []
+with open("words.txt", "r") as file:
+    for line in file:
+        line = line.strip()
+        words.append(line)
+random_word = random.randrange(0, len(words))
+
+word = words[random_word].lower()
+letters = ['_' for letter in word]
 
 died = False
 won = False
-acertou = False
-
+chances = 6
 while not died and not won:
     count_letter = 0
     formatted_letters = ' '.join(letters)
@@ -17,25 +20,27 @@ while not died and not won:
     print('playing!!')
     print(formatted_letters)
 
-    chute = input("What's the letter?")
+    chute = input("What's the letter?").lower().strip()
     if chute in word:
         for letter in word:
-            if letter.lower().strip() == chute.lower().strip():
+            if letter == chute:
                 letters[count_letter] = letter
-                count_hits += 1
-                acertou = True
-
-                if count_hits == len(letters):
-                    won = True
-                    print(word)
-                    print('You win!!')
             count_letter += 1
     else:
-        chances += 1
-        if chances == 6:
-            print('The word was: {}'.format(word))
-            print('You lose!!')
-            died = True
+        chances -= 1
+        print('You have {} chances yet'.format(chances))
+
+    died = chances == 0
+    won = '_' not in letters
+
+if died:
+    print('You lose!!')
+    print('The word was {}'.format(word))
+else:
+    print('You win!!')
+    print(word)
+
+
 
 
 
