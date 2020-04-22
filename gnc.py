@@ -16,4 +16,4 @@ for i in range(1, max_iter + 1):
     kmeans = KMeans(n_clusters=i, random_state=1234)
     kmeans.fit(data)
     clusters.append((i,kmeans.inertia_,))
-plt.plot([w[0] for w in inertia],[w[1] for w in inertia], marker="X")
+plt.plot([t[0] for t in clusters],[t[1] for t in clusters], marker="X")
